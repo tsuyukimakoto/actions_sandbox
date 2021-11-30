@@ -15,15 +15,18 @@ jobs:
         with:
           # Can be "open", "closed", or "all".  Defaults to "open".
           state: open
-      - name: notify
-        uses: actions/github-script@v5
-        with:
-          env:
-            GITHUB_ISSUE_NO: ${{ steps.findPr.outputs.pr }}
-          script: |
-            github.rest.issues.createComment({
-              issue_number: process.env.GITHUB_ISSUE_NUMBER,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: '👋 Thanks for reporting!'
-            })
+      - run: echo "Your PR is ${PR}"
+        if: success() && steps.findPr.outputs.pr
+        env:
+          PR: ${{ steps.findPr.outputs.pr }
+        # uses: actions/github-script@v5
+        # with:
+        #   script: |
+        #     github.rest.issues.createComment({
+        #       issue_number: process.env.GITHUB_ISSUE_NUMBER,
+        #       owner: context.repo.owner,
+        #       repo: context.repo.repo,
+        #       body: '👋 Thanks for reporting!'
+        #     })
+        #   env:
+        #     GITHUB_ISSUE_NO: ${{ steps.findPr.outputs.pr }}
