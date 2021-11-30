@@ -10,11 +10,18 @@ jobs:
           node-version: '14'
       - run: npm install -g bats
       - run: bats -v
-      - uses: actions/github-script@v5
+      - uses: jwalton/gh-find-current-pr@v1
+          id: find_current_pr
+          with:
+            state: open
+      - name: notify
+        uses: actions/github-script@v5
         with:
+          env:
+            GITHUB_ISSUE_NO: ${{ steps.find_current_pr.outputs.pr }}
           script: |
             github.rest.issues.createComment({
-              issue_number: context.issue.number,
+              issue_number: process.env.GITHUB_ISSUE_NUMBER,
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: '👋 Thanks for reporting!'
