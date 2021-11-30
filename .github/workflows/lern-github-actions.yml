@@ -11,7 +11,7 @@ jobs:
       - run: npm install -g bats
       - run: bats -v
       - uses: jwalton/gh-find-current-pr@v1
-        id: find_current_pr
+        id: findcurrentpr
         with:
           state: open
       - name: notify
