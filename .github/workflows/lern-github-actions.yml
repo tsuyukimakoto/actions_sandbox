@@ -21,7 +21,7 @@ jobs:
         with:
           script: |
             github.rest.issues.createComment({
-              issue_number: process.env.GITHUB_ISSUE_NUMBER,
+              issue_number: process.env.GITHUB_ISSUE_NO,
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: '👋 Thanks for reporting!'
