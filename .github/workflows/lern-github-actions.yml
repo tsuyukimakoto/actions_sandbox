@@ -1,12 +1,17 @@
-name: lern-github-actions
-on: [push]
+name: learn-github-actions
+on:
+  issues:
+    types: [opened]
 jobs:
-  check-bats-version:
+  comment-pr:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/github-script@v5
         with:
-          node-version: '14'
-      - run: npm install -g bats
-      - run: bats -v
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '👋 Thanks for reporting!'
+            })
