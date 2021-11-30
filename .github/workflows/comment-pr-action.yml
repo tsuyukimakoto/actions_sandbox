@@ -1,0 +1,26 @@
+name: comment-pr-action
+on:
+  issues:
+    types: [opened]
+  push:
+jobs:
+  comment-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: jwalton/gh-find-current-pr@v1
+        id: findPr
+        with:
+          state: open
+      - uses: actions/github-script@v5
+        if: success() && steps.findPr.outputs.pr
+        env:
+          GITHUB_ISSUE_NO: ${{ steps.findPr.outputs.pr }}
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: process.env.GITHUB_ISSUE_NO,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '👋 Thanks for reporting!'
+            })
