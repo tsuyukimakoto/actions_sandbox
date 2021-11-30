@@ -1,7 +1,7 @@
 name: comment-pr-action
 on:
   issues:
-    types: [opened]
+    types: opened
   push:
 jobs:
   comment-pr:
