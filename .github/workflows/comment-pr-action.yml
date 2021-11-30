@@ -2,6 +2,7 @@ name: comment-pr-action
 on:
   pull_request:
     types: [opened]
+  push:
 jobs:
   comment-pr:
     runs-on: ubuntu-latest
