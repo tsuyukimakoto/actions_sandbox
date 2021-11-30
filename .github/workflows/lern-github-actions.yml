@@ -13,20 +13,16 @@ jobs:
       - uses: jwalton/gh-find-current-pr@v1
         id: findPr
         with:
-          # Can be "open", "closed", or "all".  Defaults to "open".
           state: open
-      - run: echo "Your PR is ${PR}"
+      - uses: actions/github-script@v5
         if: success() && steps.findPr.outputs.pr
-        env:
-          PR: ${{ steps.findPr.outputs.pr }}
-        # uses: actions/github-script@v5
-        # with:
-        #   script: |
-        #     github.rest.issues.createComment({
-        #       issue_number: process.env.GITHUB_ISSUE_NUMBER,
-        #       owner: context.repo.owner,
-        #       repo: context.repo.repo,
-        #       body: '👋 Thanks for reporting!'
-        #     })
-        #   env:
-        #     GITHUB_ISSUE_NO: ${{ steps.findPr.outputs.pr }}
+        with:
+          env:
+            GITHUB_ISSUE_NO: ${{ steps.findPr.outputs.pr }}
+        script: |
+          github.rest.issues.createComment({
+            issue_number: process.env.GITHUB_ISSUE_NUMBER,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: '👋 Thanks for reporting!'
+          })
