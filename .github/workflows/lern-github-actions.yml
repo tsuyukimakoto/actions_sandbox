@@ -16,13 +16,13 @@ jobs:
           state: open
       - uses: actions/github-script@v5
         if: success() && steps.findPr.outputs.pr
+        env:
+          GITHUB_ISSUE_NO: ${{ steps.findPr.outputs.pr }}
         with:
-          env:
-            GITHUB_ISSUE_NO: ${{ steps.findPr.outputs.pr }}
-        script: |
-          github.rest.issues.createComment({
-            issue_number: process.env.GITHUB_ISSUE_NUMBER,
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            body: '👋 Thanks for reporting!'
-          })
+          script: |
+            github.rest.issues.createComment({
+              issue_number: process.env.GITHUB_ISSUE_NUMBER,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '👋 Thanks for reporting!'
+            })
