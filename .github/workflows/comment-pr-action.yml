@@ -1,6 +1,6 @@
 name: comment-pr-action
 on:
-  issues:
+  pull_request:
     types: [opened]
 jobs:
   comment-pr:
