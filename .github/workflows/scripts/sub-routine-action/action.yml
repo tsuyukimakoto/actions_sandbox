@@ -8,13 +8,13 @@ inputs:
 outputs:
   some-data:
     description: 'something output'
-    value: ${{ steps.some-run.outputs.v }}
+    value: ${{ steps.some-run.outputs.V }}
 runs:
   using: "composite"
   steps:
     - run: echo Hello ${{ inputs.input-data }}
       shell: bash
-    - run: echo "::set-output name=v::$(echo 'output is echo Hello ${{ inputs.input-data }}')"
+    - run: echo "::set-output name=V::output is echo Hello ${{ inputs.input-data }}"
       id: some-run
       shell: bash
     - run: ${{ github.action_path }}/my_script.sh

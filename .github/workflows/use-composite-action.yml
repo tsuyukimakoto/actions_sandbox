@@ -10,5 +10,5 @@ jobs:
         id: call_sub_routine
         with:
           input-data: 'my input data!'
-      - run: echo results is ${{ steps.call_sub_routine.outputs.output-data }}
+      - run: echo "results is ${{ steps.call_sub_routine.outputs.some-data }}"
         shell: bash
