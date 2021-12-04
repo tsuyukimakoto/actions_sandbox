@@ -6,7 +6,7 @@ jobs:
     name: A job use reusable action
     steps:
       - uses: ./.github/scripts/sub-routine-action
-      - id: call_sub_routine
+        id: call_sub_routine
         with:
           input-data: 'my input data!'
       - run: echo results is ${{ steps.call_sub_routine.outputs.output-data }}
