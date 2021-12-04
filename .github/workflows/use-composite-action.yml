@@ -5,7 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     name: A job use reusable action
     steps:
-      - uses: ./.github/my_actions/sub-routine-action@master@sandbox/new_pr3
+      - uses: ./.github/actions/sub-routine-action@sandbox/new_pr3
       - id: call_sub_routine
         with:
           input-data: 'my input data!'
