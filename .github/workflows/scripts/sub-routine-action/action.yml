@@ -14,8 +14,8 @@ runs:
   steps:
     - run: echo Hello ${{ inputs.input-data }}
       shell: bash
-    - id: some-run
-      run: echo "::set-output name=v::$(echo ' output is echo Hello' ${{ inputs.input-data }}')"
+    - run: echo "::set-output name=v::$(echo ' output is echo Hello' ${{ inputs.input-data }}')"
+      id: some-run
       shell: bash
     - run: ${{ github.action_path }}/my_script.sh
       shell: bash
