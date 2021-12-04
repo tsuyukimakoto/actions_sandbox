@@ -1,0 +1,14 @@
+on: [push]
+
+jobs:
+  call_composite_action:
+    runs-on: ubuntu-latest
+    name: A job use reusable action
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./.github/actions/sub-routine-action
+        id: call_sub_routine
+        with:
+          input-data: 'my input data!'
+      - run: echo "results is ${{ steps.call_sub_routine.outputs.some-data }}"
+        shell: bash
