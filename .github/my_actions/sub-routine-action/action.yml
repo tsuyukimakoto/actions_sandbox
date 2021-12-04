@@ -1,0 +1,21 @@
+name: 'Sub Routine'
+description: 'call from other action'
+inputs:
+  input-data: # arguments
+    description: 'something data'
+    required: true
+    default: '1'
+outputs:
+  some-data:
+    description: 'something output'
+    value: ${{ steps.some-run.outputs.v }}
+runs:
+  using: "composite"
+  steps:
+    - run: echo Hello ${{ inputs.input-data }}
+      shell: bash
+    - id: some-run
+      run: echo "::set-output name=v::$(echo ' output is echo Hello' ${{ inputs.input-data }}')"
+      shell: bash
+    - run: ${{ github.action_path }}/my_script.sh
+      shell: bash
