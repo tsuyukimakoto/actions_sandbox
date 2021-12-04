@@ -6,7 +6,7 @@ jobs:
     name: A job use reusable action
     steps:
       - uses: actions/checkout@v2
-      - uses: ./.github/workflows/scripts/sub-routine-action
+      - uses: ./.github/actions/sub-routine-action
         id: call_sub_routine
         with:
           input-data: 'my input data!'
